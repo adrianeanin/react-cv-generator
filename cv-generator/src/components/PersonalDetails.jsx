@@ -1,6 +1,8 @@
 const PersonalDetails = ({ handleChange, person }) => {
   return (
     <>
+      <h1>Personal Details</h1>
+
       <div className="input">
         <label htmlFor="fullName">Full Name</label>
         <input
