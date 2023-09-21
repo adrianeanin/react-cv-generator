@@ -1,4 +1,4 @@
-const Work = ({ work, handleChange, onClick }) => {
+const WorkInput = ({ work, handleChange, onClick }) => {
   return (
     <>
       <h1>Experience</h1>
@@ -61,9 +61,9 @@ const Work = ({ work, handleChange, onClick }) => {
         />
       </div>
 
-      <button onClick={onClick}>Add Work</button>
+      <button onClick={onClick}>Save</button>
     </>
   );
 };
 
-export default Work;
+export default WorkInput;

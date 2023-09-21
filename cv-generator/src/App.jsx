@@ -1,59 +1,24 @@
-import PersonalDetails from "./components/PersonalDetails";
+import PersonalDetailsInput from "./components/PersonalDetailsInput";
 import DisplayPersonal from "./components/DisplayPersonal";
 import DisplayEducation from "./components/DisplayEducation";
-import Education from "./components/Education";
 import DisplayWork from "./components/DisplayWork";
-import Work from "./components/Work";
+import DisplaySkills from "./components/DisplaySkills";
+import WorkInput from "./components/WorkInput";
+import EducationInput from "./components/EducationInput";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import defaultData from "./services/defaultData";
+import SkillsInput from "./components/SkillsInput";
 
 const App = () => {
-  const [personData, setPersonData] = useState({
-    fullName: "Adrian Anin",
-    role: "Full Stack Dev",
-    summary:
-      "A reliable and efficient full stack developer passionate about clean code and user experience",
-    email: "adrian.anin@outlook.com",
-    linkedin: "https://www.linkedin.com/in/adriananin/",
-    phone: "(+233) 551326702",
-  });
+  const [personData, setPersonData] = useState(defaultData.initialPersonalData);
+  const [education, setEducation] = useState(defaultData.initialEdu);
+  const [newEducation, setNewEducation] = useState(defaultData.initialNewEdu);
+  const [workExp, setWorkExp] = useState(defaultData.initialWorkExp);
+  const [newWorkExp, setNewWorkExp] = useState(defaultData.initialNewWorkExp);
 
-  const [education, setEducation] = useState([
-    {
-      id: "",
-      school: "KNUST",
-      degree: "Bsc. Computer Engineering",
-      startDate: "2017",
-      endDate: "2021",
-    },
-  ]);
-  const [newEducation, setNewEducation] = useState({
-    id: "",
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-  });
-  const [workExp, setWorkExp] = useState([
-    {
-      id: "",
-      role: "Full Stack Engineer",
-      company: "Microsoft",
-      startDate: "2023",
-      endDate: "Present",
-      description:
-        "Designing end-to-end experience for financial products on mobile & web platforms. Working closely with managers, marketing specialists and developers.",
-    },
-  ]);
-
-  const [newWorkExp, setNewWorkExp] = useState({
-    id: "",
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  });
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState({ name: "React" });
 
   const addWorkItem = () => {
     const newId = uuidv4();
@@ -84,6 +49,17 @@ const App = () => {
     setEducation([...education, newEducationItem]);
   };
 
+  const addSkill = () => {
+    const newId = uuidv4();
+
+    const newSkillItem = {
+      id: newId,
+      name: newSkill.name,
+    };
+
+    setSkills([...skills, newSkillItem]);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPersonData((prev) => {
@@ -110,23 +86,39 @@ const App = () => {
     });
   };
 
+  const handleSkillChange = (e) => {
+    const { name, value } = e.target;
+    setNewSkill({
+      ...newSkill,
+      [name]: value,
+    });
+  };
+
   return (
     <>
-      <PersonalDetails handleChange={handleChange} person={personData} />
+      <PersonalDetailsInput handleChange={handleChange} person={personData} />
       <br />
       <hr />
-      <Education
+      <EducationInput
         handleChange={handleEduChange}
         education={newEducation}
         onClick={addEducationItem}
       />
       <br />
       <hr />
-      <Work
+      <WorkInput
         handleChange={handleWorkChange}
         work={newWorkExp}
         onClick={addWorkItem}
       />
+      <br />
+      <hr />
+      <SkillsInput
+        handleChange={handleSkillChange}
+        skill={newSkill}
+        onClick={addSkill}
+      />
+
       <hr />
       <hr />
       <DisplayPersonal person={personData} />
@@ -136,21 +128,20 @@ const App = () => {
         <DisplayEducation
           key={item.id}
           education={item}
-          isFirstRender={index === 0 ? true : false}
+          isFirstRender={index === 0}
         />
       ))}
 
       <hr />
       <hr />
       {workExp.map((item, index) => (
-        <DisplayWork
-          key={item.id}
-          work={item}
-          isFirstRender={index === 0 ? true : false}
-        />
+        <DisplayWork key={item.id} work={item} isFirstRender={index === 0} />
       ))}
-      {/* <DisplayWork /> */}
-      {/* <DisplayEducation education={newEducation} /> */}
+      <hr />
+      <hr />
+      {skills.map((skill, index) => (
+        <DisplaySkills key={index} skill={skill} isFirstRender={index === 0} />
+      ))}
     </>
   );
 };

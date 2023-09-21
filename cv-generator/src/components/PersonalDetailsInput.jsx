@@ -1,4 +1,4 @@
-const PersonalDetails = ({ handleChange, person }) => {
+const PersonalDetailsInput = ({ handleChange, person }) => {
   return (
     <>
       <h1>Personal Details</h1>
@@ -78,4 +78,4 @@ const PersonalDetails = ({ handleChange, person }) => {
   );
 };
 
-export default PersonalDetails;
+export default PersonalDetailsInput;

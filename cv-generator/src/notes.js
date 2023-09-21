@@ -1,5 +1,0 @@
-// role: "",
-// summary: "",
-// email: "",
-// linkedin: "",
-// number: "",

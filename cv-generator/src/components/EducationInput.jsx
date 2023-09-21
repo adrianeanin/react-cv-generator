@@ -1,4 +1,4 @@
-const Education = ({ education, handleChange, onClick }) => {
+const EducationInput = ({ education, handleChange, onClick }) => {
   return (
     <>
       <h1>Education</h1>
@@ -49,9 +49,9 @@ const Education = ({ education, handleChange, onClick }) => {
         />
       </div>
 
-      <button onClick={onClick}>Add Education</button>
+      <button onClick={onClick}>Save</button>
     </>
   );
 };
 
-export default Education;
+export default EducationInput;
