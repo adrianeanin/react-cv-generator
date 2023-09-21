@@ -1,4 +1,4 @@
-const Display = ({ person }) => {
+const DisplayPersonal = ({ person }) => {
   return (
     <>
       <div className="summary-left">
@@ -24,4 +24,4 @@ const Display = ({ person }) => {
   );
 };
 
-export default Display;
+export default DisplayPersonal;

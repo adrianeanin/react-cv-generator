@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const PersonalDetails = ({ handleChange, person }) => {
   return (
     <>
