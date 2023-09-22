@@ -1,4 +1,4 @@
-const WorkInput = ({ work, handleChange, onClick }) => {
+const WorkInput = ({ work, handleChange, onClick, onDeleteClick }) => {
   return (
     <>
       <h1>Experience</h1>
@@ -62,6 +62,7 @@ const WorkInput = ({ work, handleChange, onClick }) => {
       </div>
 
       <button onClick={onClick}>Save</button>
+      {onDeleteClick && <button onClick={onDeleteClick}>Delete</button>}
     </>
   );
 };

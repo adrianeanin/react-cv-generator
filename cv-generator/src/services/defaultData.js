@@ -8,6 +8,16 @@ const initialPersonalData = {
   phone: "(+233) 551326702",
 };
 
+const initialEdu = [
+  {
+    id: "",
+    school: "KNUST",
+    degree: "Bsc. Computer Engineering",
+    startDate: "2017",
+    endDate: "2021",
+  },
+];
+
 const initialWorkExp = [
   {
     id: "",
@@ -17,16 +27,6 @@ const initialWorkExp = [
     endDate: "Present",
     description:
       "Designing end-to-end experience for financial products on mobile & web platforms. Working closely with managers, marketing specialists and developers.",
-  },
-];
-
-const initialEdu = [
-  {
-    id: "",
-    school: "KNUST",
-    degree: "Bsc. Computer Engineering",
-    startDate: "2017",
-    endDate: "2021",
   },
 ];
 
@@ -47,10 +47,19 @@ const initialNewWorkExp = {
   description: "",
 };
 
+const initialSkills = [
+  { name: "React" },
+  { name: "NodeJs" },
+  { name: "Jest" },
+  { name: "CSS" },
+  { name: "Git" },
+];
+
 export default {
   initialPersonalData,
   initialWorkExp,
   initialEdu,
   initialNewEdu,
   initialNewWorkExp,
+  initialSkills,
 };

@@ -1,4 +1,4 @@
-const SkillsInput = ({ handleChange, skill, onClick }) => {
+const SkillsInput = ({ handleChange, skill, onClick, onDeleteClick }) => {
   return (
     <>
       <div className="input">
@@ -10,6 +10,7 @@ const SkillsInput = ({ handleChange, skill, onClick }) => {
           onChange={handleChange}
         />
         <button onClick={onClick}>Add Skill</button>
+        {onDeleteClick && <button onClick={onDeleteClick}>Delete</button>}
       </div>
     </>
   );

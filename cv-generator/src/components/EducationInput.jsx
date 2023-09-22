@@ -1,4 +1,9 @@
-const EducationInput = ({ education, handleChange, onClick }) => {
+const EducationInput = ({
+  education,
+  handleChange,
+  onClick,
+  onDeleteClick,
+}) => {
   return (
     <>
       <h1>Education</h1>
@@ -50,6 +55,7 @@ const EducationInput = ({ education, handleChange, onClick }) => {
       </div>
 
       <button onClick={onClick}>Save</button>
+      {onDeleteClick && <button onClick={onDeleteClick}>Delete</button>}
     </>
   );
 };

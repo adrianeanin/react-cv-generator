@@ -13,14 +13,57 @@ import SkillsInput from "./components/SkillsInput";
 const App = () => {
   const [personData, setPersonData] = useState(defaultData.initialPersonalData);
   const [education, setEducation] = useState(defaultData.initialEdu);
-  const [newEducation, setNewEducation] = useState(defaultData.initialNewEdu);
   const [workExp, setWorkExp] = useState(defaultData.initialWorkExp);
+  const [newEducation, setNewEducation] = useState(defaultData.initialNewEdu);
   const [newWorkExp, setNewWorkExp] = useState(defaultData.initialNewWorkExp);
+  const [skills, setSkills] = useState(defaultData.initialSkills);
+  const [newSkill, setNewSkill] = useState({ name: "" });
+  const [mostRecentEducationId, setMostRecentEducationId] = useState(null);
+  const [mostRecentWorkId, setMostRecentWorkId] = useState(null);
+  const [mostRecentSkillId, setMostRecentSkillId] = useState(null);
 
-  const [skills, setSkills] = useState([]);
-  const [newSkill, setNewSkill] = useState({ name: "React" });
+  const clearResume = () => {
+    setPersonData({});
+    setEducation([]);
+    setWorkExp([]);
+    setNewEducation({});
+    setNewWorkExp({});
+    setSkills([]);
+    setNewSkill({});
+    setMostRecentEducationId(null);
+    setMostRecentWorkId(null);
+    setMostRecentSkillId(null);
+  };
 
-  const addWorkItem = () => {
+  const loadExample = () => {
+    setPersonData(defaultData.initialPersonalData);
+    setEducation(defaultData.initialEdu);
+    setWorkExp(defaultData.initialWorkExp);
+    setNewEducation(defaultData.initialNewEdu);
+    setNewWorkExp(defaultData.initialNewWorkExp);
+    setSkills(defaultData.initialSkills);
+    setNewSkill({ name: "" });
+    setMostRecentEducationId(null);
+    setMostRecentWorkId(null);
+    setMostRecentSkillId(null);
+  };
+
+  const addEducation = () => {
+    const newId = uuidv4();
+
+    const newEducationItem = {
+      id: newId,
+      school: newEducation.school,
+      degree: newEducation.degree,
+      startDate: newEducation.startDate,
+      endDate: newEducation.endDate,
+    };
+
+    setEducation([...education, newEducationItem]);
+    setMostRecentEducationId(newId);
+  };
+
+  const addWork = () => {
     const newId = uuidv4();
 
     const newWorkItem = {
@@ -33,20 +76,7 @@ const App = () => {
     };
 
     setWorkExp([...workExp, newWorkItem]);
-  };
-
-  const addEducationItem = () => {
-    const newId = uuidv4();
-
-    const newEducationItem = {
-      id: newId,
-      school: newEducation.school,
-      degree: newEducation.degree,
-      startDate: newEducation.startDate,
-      endDate: newEducation.endDate,
-    };
-
-    setEducation([...education, newEducationItem]);
+    setMostRecentWorkId(newId);
   };
 
   const addSkill = () => {
@@ -58,9 +88,10 @@ const App = () => {
     };
 
     setSkills([...skills, newSkillItem]);
+    setMostRecentSkillId(newId);
   };
 
-  const handleChange = (e) => {
+  const handlePersonChange = (e) => {
     const { name, value } = e.target;
     setPersonData((prev) => {
       return {
@@ -94,22 +125,62 @@ const App = () => {
     });
   };
 
+  const removeMostRecentSkill = () => {
+    if (mostRecentSkillId) {
+      const updatedSkills = skills.filter(
+        (skill) => skill.id !== mostRecentSkillId
+      );
+      setSkills(updatedSkills);
+      setMostRecentSkillId(null);
+    }
+  };
+
+  const removeMostRecentEducation = () => {
+    if (mostRecentEducationId) {
+      const updatedEducation = education.filter(
+        (edu) => edu.id !== mostRecentEducationId
+      );
+      setEducation(updatedEducation);
+      setMostRecentEducationId(null);
+    }
+  };
+
+  const removeMostRecentWork = () => {
+    if (mostRecentWorkId) {
+      const updatedWorkExp = workExp.filter(
+        (work) => work.id !== mostRecentWorkId
+      );
+      setWorkExp(updatedWorkExp);
+      setMostRecentWorkId(null);
+    }
+  };
+
   return (
     <>
-      <PersonalDetailsInput handleChange={handleChange} person={personData} />
+      <button onClick={clearResume}>Clear Resume</button>
+      <button onClick={loadExample}>Load Example</button>
+      <br />
+      <hr />
+
+      <PersonalDetailsInput
+        handleChange={handlePersonChange}
+        person={personData}
+      />
       <br />
       <hr />
       <EducationInput
         handleChange={handleEduChange}
         education={newEducation}
-        onClick={addEducationItem}
+        onClick={addEducation}
+        onDeleteClick={removeMostRecentEducation}
       />
       <br />
       <hr />
       <WorkInput
         handleChange={handleWorkChange}
         work={newWorkExp}
-        onClick={addWorkItem}
+        onClick={addWork}
+        onDeleteClick={removeMostRecentWork}
       />
       <br />
       <hr />
@@ -117,6 +188,7 @@ const App = () => {
         handleChange={handleSkillChange}
         skill={newSkill}
         onClick={addSkill}
+        onDeleteClick={removeMostRecentSkill}
       />
 
       <hr />
@@ -140,7 +212,11 @@ const App = () => {
       <hr />
       <hr />
       {skills.map((skill, index) => (
-        <DisplaySkills key={index} skill={skill} isFirstRender={index === 0} />
+        <DisplaySkills
+          key={skill.id}
+          skill={skill}
+          isFirstRender={index === 0}
+        />
       ))}
     </>
   );
