@@ -1,0 +1,9 @@
+.skills-list {
+  padding-inline-start: 0;
+  list-style-type: none;
+  line-height: 1;
+}
+
+.skill {
+  font-size: var(--step-0);
+}

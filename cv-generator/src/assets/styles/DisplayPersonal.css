@@ -1,0 +1,48 @@
+.personal-details-wrapper {
+  background-color: var(--light-gray);
+}
+
+.personal-details {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-left > * + * {
+  margin-top: 0.25rem;
+}
+
+.personal-details h1 {
+  font-size: var(--step-4);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--dark-gray);
+}
+
+.personal-details h2 {
+  font-size: var(--step-2);
+  font-weight: 500;
+  color: var(--blue);
+}
+
+.personal-details p {
+  margin-top: 0.5rem;
+  font-size: var(--step--1);
+  font-style: normal;
+  font-weight: 400;
+  max-width: 85%;
+  color: var(--dark-gray);
+  padding-bottom: 0.5rem;
+}
+
+.profile p {
+  font-size: var(--step--1);
+  font-style: normal;
+  font-weight: 500;
+  color: var(--gray);
+  line-height: 0.875rem;
+}
+
+.profile {
+  padding-bottom: 0.4rem;
+}

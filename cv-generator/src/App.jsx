@@ -157,67 +157,82 @@ const App = () => {
 
   return (
     <>
-      <button onClick={clearResume}>Clear Resume</button>
-      <button onClick={loadExample}>Load Example</button>
-      <br />
-      <hr />
+      <main>
+        <section className="inputs">
+          <div className="btns">
+            <button onClick={clearResume} className="delete-btn">
+              🗑 Clear Resume
+            </button>
+            <button onClick={loadExample} className="save-btn">
+              📄 Load Example
+            </button>
+          </div>
 
-      <PersonalDetailsInput
-        handleChange={handlePersonChange}
-        person={personData}
-      />
-      <br />
-      <hr />
-      <EducationInput
-        handleChange={handleEduChange}
-        education={newEducation}
-        onClick={addEducation}
-        onDeleteClick={removeMostRecentEducation}
-      />
-      <br />
-      <hr />
-      <WorkInput
-        handleChange={handleWorkChange}
-        work={newWorkExp}
-        onClick={addWork}
-        onDeleteClick={removeMostRecentWork}
-      />
-      <br />
-      <hr />
-      <SkillsInput
-        handleChange={handleSkillChange}
-        skill={newSkill}
-        onClick={addSkill}
-        onDeleteClick={removeMostRecentSkill}
-      />
+          <PersonalDetailsInput
+            handleChange={handlePersonChange}
+            person={personData}
+          />
 
-      <hr />
-      <hr />
-      <DisplayPersonal person={personData} />
-      <hr />
-      <hr />
-      {education.map((item, index) => (
-        <DisplayEducation
-          key={item.id}
-          education={item}
-          isFirstRender={index === 0}
-        />
-      ))}
+          <WorkInput
+            handleChange={handleWorkChange}
+            work={newWorkExp}
+            onClick={addWork}
+            onDeleteClick={removeMostRecentWork}
+          />
 
-      <hr />
-      <hr />
-      {workExp.map((item, index) => (
-        <DisplayWork key={item.id} work={item} isFirstRender={index === 0} />
-      ))}
-      <hr />
-      <hr />
-      {skills.map((skill, index) => (
-        <DisplaySkills
-          key={skill.id}
-          skill={skill}
-          isFirstRender={index === 0}
-        />
-      ))}
+          <EducationInput
+            handleChange={handleEduChange}
+            education={newEducation}
+            onClick={addEducation}
+            onDeleteClick={removeMostRecentEducation}
+          />
+
+          <SkillsInput
+            handleChange={handleSkillChange}
+            skill={newSkill}
+            onClick={addSkill}
+            onDeleteClick={removeMostRecentSkill}
+          />
+        </section>
+
+        <section className="displays">
+          <DisplayPersonal person={personData} />
+
+          <div className="columns | center-content">
+            <div className="columns-left">
+              {workExp.map((item, index) => (
+                <DisplayWork
+                  key={item.id}
+                  work={item}
+                  isFirstRender={index === 0}
+                />
+              ))}
+            </div>
+
+            <div className="columns-right ">
+              <div className="column-right-content">
+                {education.map((item, index) => (
+                  <DisplayEducation
+                    key={item.id}
+                    education={item}
+                    isFirstRender={index === 0}
+                  />
+                ))}
+              </div>
+
+              <div className="column-right-content">
+                {skills.map((skill, index) => (
+                  <DisplaySkills
+                    key={skill.id}
+                    skill={skill}
+                    isFirstRender={index === 0}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 };

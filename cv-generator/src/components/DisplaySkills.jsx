@@ -1,10 +1,14 @@
+import "../assets/styles/DisplaySkills.css";
+
 const DisplaySkills = ({ skill, isFirstRender }) => {
   return (
     <>
-      {isFirstRender && <h4>Skills</h4>}
-      <div className="skills">
-        <li>{skill.name}</li>
-      </div>
+      <section className="skills-wrapper">
+        {isFirstRender && <h4>Skills</h4>}
+        <ul className="skills-list">
+          <li className="skill">{skill.name}</li>
+        </ul>
+      </section>
     </>
   );
 };
