@@ -1,6 +1,6 @@
 # React-cv-generator
 
-The Cv Generator App is a web application that allows users to create and manage their resumes. Users can input their personal details, education history, work experience, and skills, and the app will display a neatly formatted resume.
+The CV Generator App is a web application that allows users to create and manage their resumes. Users can input their personal details, education history, work experience, and skills, and the app will display a neatly formatted resume.
 
 ## Features
 
