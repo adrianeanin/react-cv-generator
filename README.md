@@ -16,4 +16,4 @@ The CV Generator App is a web application that allows users to create and manage
 - UUID: The uuid library is used to generate unique identifiers for each education, work experience, and skill entry.
 - useState: React's useState hook is used for managing the application's state.
 - CSS: Cascading Style Sheets (CSS) are used for styling the application's user interface.
-
+- localStorage: Store user form data on between sessions.
