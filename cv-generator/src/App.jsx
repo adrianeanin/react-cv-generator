@@ -6,8 +6,9 @@ import DisplaySkills from "./components/DisplaySkills";
 import WorkInput from "./components/WorkInput";
 import EducationInput from "./components/EducationInput";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import defaultData from "./services/defaultData";
+import helpers from "./services/helpers";
 import SkillsInput from "./components/SkillsInput";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
   const [mostRecentSkillId, setMostRecentSkillId] = useState(null);
 
   const clearResume = () => {
+    localStorage.clear();
     setPersonData({});
     setEducation([]);
     setWorkExp([]);
@@ -48,21 +50,6 @@ const App = () => {
     setMostRecentSkillId(null);
   };
 
-  const addEducation = () => {
-    const newId = uuidv4();
-
-    const newEducationItem = {
-      id: newId,
-      school: newEducation.school,
-      degree: newEducation.degree,
-      startDate: newEducation.startDate,
-      endDate: newEducation.endDate,
-    };
-
-    setEducation([...education, newEducationItem]);
-    setMostRecentEducationId(newId);
-  };
-
   const addWork = () => {
     const newId = uuidv4();
 
@@ -75,8 +62,29 @@ const App = () => {
       description: newWorkExp.description,
     };
 
-    setWorkExp([...workExp, newWorkItem]);
+    const updatedWorkData = [...workExp, newWorkItem];
+    setWorkExp(updatedWorkData);
+    helpers.saveWorkToLocalStorage(updatedWorkData);
+
     setMostRecentWorkId(newId);
+  };
+
+  const addEducation = () => {
+    const newId = uuidv4();
+
+    const newEducationItem = {
+      id: newId,
+      school: newEducation.school,
+      degree: newEducation.degree,
+      startDate: newEducation.startDate,
+      endDate: newEducation.endDate,
+    };
+
+    const updatedEducationData = [...education, newEducationItem];
+    setEducation(updatedEducationData);
+    helpers.saveEducationToLocalStorage(updatedEducationData);
+
+    setMostRecentEducationId(newId);
   };
 
   const addSkill = () => {
@@ -87,42 +95,58 @@ const App = () => {
       name: newSkill.name,
     };
 
-    setSkills([...skills, newSkillItem]);
+    const updatedSkillsData = [...skills, newSkillItem];
+    setSkills(updatedSkillsData);
+    saveSkillsToLocalStorage(updatedSkillsData);
+
     setMostRecentSkillId(newId);
   };
 
   const handlePersonChange = (e) => {
     const { name, value } = e.target;
+
     setPersonData((prev) => {
-      return {
+      const updatedPersonData = {
         ...prev,
         [name]: value,
       };
+      localStorage.setItem("personData", JSON.stringify(updatedPersonData));
+      return updatedPersonData;
     });
   };
 
   const handleEduChange = (e) => {
     const { name, value } = e.target;
-    setNewEducation({
+
+    const updatedNewEducation = {
       ...newEducation,
       [name]: value,
-    });
+    };
+    setNewEducation(updatedNewEducation);
+    localStorage.setItem("newEducation", JSON.stringify(updatedNewEducation));
   };
 
   const handleWorkChange = (e) => {
     const { name, value } = e.target;
-    setNewWorkExp({
+
+    const updatedNewWorkExp = {
       ...newWorkExp,
       [name]: value,
-    });
+    };
+    setNewWorkExp(updatedNewWorkExp);
+    localStorage.setItem("newWork", JSON.stringify(updatedNewWorkExp));
   };
 
   const handleSkillChange = (e) => {
     const { name, value } = e.target;
-    setNewSkill({
+
+    const updatedNewSkill = {
       ...newSkill,
       [name]: value,
-    });
+      id: mostRecentSkillId,
+    };
+    setNewSkill(updatedNewSkill);
+    localStorage.setItem("newSkill", JSON.stringify(updatedNewSkill));
   };
 
   const removeMostRecentSkill = () => {
@@ -154,6 +178,18 @@ const App = () => {
       setMostRecentWorkId(null);
     }
   };
+
+  useEffect(() => {
+    helpers.getFromLocalStorage(
+      setPersonData,
+      setNewEducation,
+      setNewWorkExp,
+      setNewSkill,
+      setWorkExp,
+      setEducation,
+      setSkills
+    );
+  }, []);
 
   return (
     <>

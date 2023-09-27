@@ -10,7 +10,7 @@ const WorkInput = ({ work, handleChange, onClick, onDeleteClick }) => {
             placeholder="Enter company name"
             id="company"
             name="company"
-            value={work.school}
+            value={work.company}
             onChange={handleChange}
           />
         </div>
@@ -22,7 +22,7 @@ const WorkInput = ({ work, handleChange, onClick, onDeleteClick }) => {
             placeholder="Enter position title"
             id="role"
             name="role"
-            value={work.degree}
+            value={work.role}
             onChange={handleChange}
           />
         </div>

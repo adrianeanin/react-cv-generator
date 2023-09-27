@@ -38,8 +38,8 @@ const initialWorkExp = [
   },
   {
     id: "",
-    role: "Full Stack Engineer",
-    company: "The Odin Project",
+    role: "Front End Engineer",
+    company: "Front End Mentor",
     startDate: "2023",
     endDate: "Present",
     description:
