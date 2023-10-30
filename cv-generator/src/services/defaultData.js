@@ -3,7 +3,7 @@ const initialPersonalData = {
   role: "Full Stack Engineer",
   summary:
     "A reliable and efficient full stack developer passionate about clean code and user experience. I enjoy working in close collaboration with teams across technology, business and design.",
-  email: "adrian.anin@outlook.com",
+  email: "adriananin@icloud.com",
   linkedin: "https://www.linkedin.com/in/adriananin/",
   phone: "(+233) 551326702",
 };
@@ -65,11 +65,11 @@ const initialNewWorkExp = {
 };
 
 const initialSkills = [
-  { name: "MongoDb, Express, React, NodeJs" },
-  { name: "" },
-  { name: "Jest, Git, Vite, Webpack, NPM" },
-  { name: "HTML, CSS, Javascript" },
-  { name: "" },
+  { id: "", name: "MongoDb, Express, React, NodeJs" },
+  { id: "", name: "" },
+  { id: "", name: "Jest, Git, Vite, Webpack, NPM" },
+  { id: "", name: "HTML, CSS, Javascript" },
+  { id: "", name: "" },
 ];
 
 export default {

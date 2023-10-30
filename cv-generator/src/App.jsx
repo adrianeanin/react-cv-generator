@@ -7,6 +7,7 @@ import WorkInput from "./components/WorkInput";
 import EducationInput from "./components/EducationInput";
 import { v4 as uuidv4 } from "uuid";
 import { useState, useEffect } from "react";
+import html2pdf from "html2pdf.js";
 import defaultData from "./services/defaultData";
 import helpers from "./services/helpers";
 import SkillsInput from "./components/SkillsInput";
@@ -97,9 +98,9 @@ const App = () => {
 
     const updatedSkillsData = [...skills, newSkillItem];
     setSkills(updatedSkillsData);
-    saveSkillsToLocalStorage(updatedSkillsData);
 
     setMostRecentSkillId(newId);
+    helpers.saveSkillsToLocalStorage(updatedSkillsData);
   };
 
   const handlePersonChange = (e) => {
@@ -179,6 +180,16 @@ const App = () => {
     }
   };
 
+  const saveAsPDF = () => {
+    try {
+      const cvContainer = document.querySelector("#cv-container");
+
+      html2pdf().from(cvContainer).save();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
+  };
+
   useEffect(() => {
     helpers.getFromLocalStorage(
       setPersonData,
@@ -201,6 +212,9 @@ const App = () => {
             </button>
             <button onClick={loadExample} className="save-btn">
               📄 Load Example
+            </button>
+            <button onClick={saveAsPDF} className="pdf-btn">
+              📄 Save PDF
             </button>
           </div>
 
@@ -231,7 +245,7 @@ const App = () => {
           />
         </section>
 
-        <section className="displays">
+        <section className="displays" id="cv-container">
           <DisplayPersonal person={personData} />
 
           <div className="columns | center-content">
@@ -259,8 +273,8 @@ const App = () => {
               <div className="column-right-content">
                 {skills.map((skill, index) => (
                   <DisplaySkills
-                    key={skill.id}
                     skill={skill}
+                    key={skill.id}
                     isFirstRender={index === 0}
                   />
                 ))}

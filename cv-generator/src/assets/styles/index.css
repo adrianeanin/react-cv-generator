@@ -98,7 +98,8 @@ button:hover {
   margin-top: 1rem;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  padding: 0 0.75em;
 }
 
 /* Input Styling */
@@ -175,5 +176,15 @@ hr {
 
   .displays {
     justify-self: center;
+  }
+}
+
+#cv-container {
+  width: 210mm; /* A4 width */
+}
+
+@media print {
+  #cv-container {
+    width: 100%;
   }
 }
