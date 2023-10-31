@@ -10,7 +10,7 @@ const initialPersonalData = {
 
 const initialEdu = [
   {
-    id: "",
+    id: "0",
     school: "KNUST",
     degree: "BSc Computer Engineering",
 
@@ -18,7 +18,7 @@ const initialEdu = [
     endDate: "2021",
   },
   {
-    id: "",
+    id: "1",
     school: "The Odin Project",
     degree: "Full Stack Web Development",
     startDate: "2022",
@@ -28,7 +28,7 @@ const initialEdu = [
 
 const initialWorkExp = [
   {
-    id: "",
+    id: "0",
     role: "Full Stack Engineer",
     company: "The Odin Project",
     startDate: "2023",
@@ -37,7 +37,7 @@ const initialWorkExp = [
       "Designing end-to-end experience for products on mobile & web platforms. Working closely with managers, marketing specialists and developers.",
   },
   {
-    id: "",
+    id: "1",
     role: "Front End Engineer",
     company: "Front End Mentor",
     startDate: "2023",
@@ -65,11 +65,11 @@ const initialNewWorkExp = {
 };
 
 const initialSkills = [
-  { id: "", name: "MongoDb, Express, React, NodeJs" },
-  { id: "", name: "" },
-  { id: "", name: "Jest, Git, Vite, Webpack, NPM" },
-  { id: "", name: "HTML, CSS, Javascript" },
-  { id: "", name: "" },
+  { id: "0", name: "MongoDb, Express, React, NodeJs" },
+  { id: "1", name: "" },
+  { id: "2", name: "Jest, Git, Vite, Webpack, NPM" },
+  { id: "3", name: "HTML, CSS, Javascript" },
+  { id: "4", name: "" },
 ];
 
 export default {
